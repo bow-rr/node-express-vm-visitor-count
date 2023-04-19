@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css" />
+    <title>Cloud Week 2 Visitor Count</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1><span class="emoji">☁️</span> Cloud Week 2</h1>
+      <h2>Node Express Visitor Count on AWS EC2</h2>
+      <div class="divider"></div>
+      <h3>You :</h3>
+      <p>Current Visitor IP: <span class="bold"><%= currentVisitor.visitorIp %></span></p>
+      <p>
+        Current Visitor Number Of Visits:
+        <span class="bold"><%= currentVisitor.numberOfVisits %></span>
+      </p>
+      <div class="divider"></div>
+      <h3>Everyone :</h3>
+      <p>Total Visits: <span class="bold"><%= totalVisits %></span></p>
+      <p>
+        Total Unique Visits:
+        <span class="bold"><%= totalUniqueVisitors %></span>
+      </p>
+      <div class="divider"></div>
+      <div class="most-recent">
+        <h3>List of all Visitors (Sorted by Most Recent):</h3>
+        <ul>
+          <% allVisitors.sort((a,b) => b.updatedAt - a.updatedAt).forEach((visitor) => { %>
+          <li>
+            <div>IP: <span class="bold"><%= visitor.visitorIp %></span></div>
+            <div>
+              Last Visited:
+              <span class="bold"><%= (new Date(visitor.updatedAt)).toLocaleString() %></span>
+            </div>
+            <div>Total Visits: <span class="bold"><%= visitor.numberOfVisits %></div>
+          </li>
+          <% }); %>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>
